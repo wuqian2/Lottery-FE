@@ -1,1 +1,70 @@
-<p>prize works!</p>
+<form nz-form (ngSubmit)="onSubmit()" #prizeForm="ngForm">
+  <div nz-row [nzGutter]="8">
+    <legend>新增奖品</legend>
+
+    <div nz-col [nzSpan]="7">
+      <nz-form-item nzFlex>
+        <nz-form-label nzRequired>奖品名称</nz-form-label>
+        <nz-form-control nzHasFeedback>
+          <input nz-input required maxlength="20"  [(ngModel)]="addPrize.prizeName" id="prizeName"
+                 name="prizeName"/>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="7">
+      <nz-form-item nzFlex>
+        <nz-form-label nzRequired>奖品数量</nz-form-label>
+        <nz-form-control nzHasFeedback>
+          <nz-input-number nz-input required  [(ngModel)]="addPrize.prizeCount" id="prizeCount"
+                           name="prizeCount">
+          </nz-input-number>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="7">
+      <nz-form-item nzFlex>
+        <nz-form-label nzRequired>奖品等级</nz-form-label>
+        <nz-form-control nzHasFeedback>
+
+          <nz-select [(ngModel)]="addPrize.prizeLevel"  nzPlaceHolder="选择等级....." id="prizeLevel" name="prizeLevel">
+            <nz-option nzValue="1" nzLabel="一等奖"></nz-option>
+            <nz-option nzValue="2" nzLabel="二等奖"></nz-option>
+            <nz-option nzValue="3" nzLabel="三等奖"></nz-option>
+            <nz-option nzValue="4" nzLabel="四等奖"></nz-option>
+            <nz-option nzValue="5" nzLabel="五等奖"></nz-option>
+            <nz-option nzValue="6" nzLabel="六等奖"></nz-option>
+          </nz-select>
+
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <button nz-button nzType="primary" [disabled]="!prizeForm.form.valid">新增</button>
+
+</form>
+
+<nz-table #basicTable [nzData]="prizeList">
+  <thead>
+  <tr>
+    <th>奖品名称</th>
+    <th>奖品等级</th>
+    <th>奖品数量</th>
+    <th>已中数量</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{data.prizeName}}</td>
+    <td>{{data.prizeLevel}}</td>
+    <td>{{data.prizeCount}}</td>
+    <td>{{data.sentedPrize}}</td>
+    <td>
+      <a>Action 一 {{data.name}}</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+

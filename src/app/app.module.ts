@@ -10,12 +10,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
+import {LogsComponent} from "./pages/logs/logs.component";
+import {PlanComponent} from "./pages/plan/plan.component";
+import {PrizeComponent} from "./pages/prize/prize.component";
+import {RecordComponent} from "./pages/record/record.component";
+import {UserComponent} from "./pages/user/user.component";
 
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LogsComponent,
+    PlanComponent,
+    PrizeComponent,
+    RecordComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
