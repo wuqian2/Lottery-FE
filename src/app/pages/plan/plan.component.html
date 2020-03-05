@@ -1,1 +1,71 @@
-<p>plan works!</p>
+<button nz-button nzType="primary" (click)="addPlan()">新增计划</button>
+
+<nz-card style="width: 100%;margin-top: 20px" *ngFor="let plan of planList;let i = index;">
+  <nz-card-tab>
+    <div nz-row [nzGutter]="8">
+      <div nz-col [nzSpan]="7">
+        <nz-form-item nzFlex>
+          <nz-form-label nzRequired>起始日期</nz-form-label>
+          <nz-form-control >
+            <nz-date-picker [(ngModel)]="plan.beginDate"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="7">
+        <nz-form-item nzFlex>
+          <nz-form-label nzRequired>结束日期</nz-form-label>
+          <nz-form-control >
+            <nz-date-picker [(ngModel)]="plan.endDate"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="7">
+        <nz-form-item nzFlex>
+          <nz-form-label nzRequired>基础概率</nz-form-label>
+          <nz-form-control >
+            <nz-input-group [nzSuffix]="suffixTemplateInfo">
+            <input nz-input  required [(ngModel)]="plan.baseProbability"/>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="3">
+        <div style="margin-top: 5px">
+          <a (click)="savePlan(plan)">保存</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a nz-popconfirm
+             nzPopconfirmTitle="确认删除吗？"
+             nzPopconfirmPlacement="bottom"
+             (nzOnConfirm)="deletePlan(plan)">删除</a>
+        </div>
+      </div>
+    </div>
+
+  </nz-card-tab>
+
+  <nz-table #basicTable [nzData]="plan.planInfoList" [nzPageSize]="5">
+    <thead>
+    <tr>
+      <th>奖品名称</th>
+      <th>奖品数量</th>
+      <th>已中数量</th>
+      <th>交易笔数限制</th>
+      <th>交易金额限制</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of plan.planInfoList">
+      <td>{{data.prizeName}}</td>
+      <td><nz-input-number nz-input required [(ngModel)]="data.planCount"></nz-input-number></td>
+      <td>{{data.sendedCount}}</td>
+      <td><nz-input-number nz-input required [(ngModel)]="data.quantityLimit"></nz-input-number></td>
+      <td><nz-input-number nz-input required [(ngModel)]="data.amountLimit"></nz-input-number></td>
+    </tr>
+    </tbody>
+  </nz-table>
+
+</nz-card>
+
+<ng-template #suffixTemplateInfo>
+ <span>%</span>
+</ng-template>
