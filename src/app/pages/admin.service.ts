@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Plan, Prize, Result} from "../dto/adminDto";
 import {Observable} from "rxjs";
+import {backendUrl} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-  url: string = 'http://localhost:8080'
+  url: string = backendUrl;
 
   constructor(private httpClient: HttpClient) {
 
@@ -41,5 +42,10 @@ export class AdminService {
   //删除计划
   deletePlan(id) {
     return this.httpClient.delete<Result>(this.url + '/admin/plan/' + id);
+  }
+
+  //获取客户列表
+  getCustomerList(pageSize, pageIndex) {
+    return this.httpClient.get<Result>(this.url + '/common/customer', {params:{'pageSize': pageSize,'pageIndex': pageIndex}});
   }
 }

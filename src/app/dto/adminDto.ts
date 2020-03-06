@@ -22,6 +22,7 @@ export class Plan {
   public beginDate: Date;
   public endDate: Date;
   public baseProbability: number;
+  public lotteryCount: number;
   public planInfoList: PlanInfo[];
 }
 
@@ -35,6 +36,19 @@ export class PlanInfo {
   public quantityLimit: number;
   public amountLimit: number;
 }
+
+export class Customer {
+  public id: number;
+  public phoneNo: string;
+  public customerNo: string;
+  public customerName: string;
+  public certNo: string;
+  public transactionCount: number;
+  public transactionAmount: number;
+  public remainingCount: number;
+  public flag: string;
+}
+
 
 export class Result {
   public code: number;

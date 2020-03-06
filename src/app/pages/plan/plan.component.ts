@@ -29,10 +29,13 @@ export class PlanComponent implements OnInit {
       planInfo.prizeName = item.prizeName;
       planInfo.prizeLevel = item.prizeLevel;
       planInfo.prizeId = item.id;
+      planInfo.amountLimit = 0;
+      planInfo.quantityLimit = 0;
       planInfo.sendedCount = 0;
       return planInfo;
     });
     const plan = new Plan();
+    plan.lotteryCount = 3;
     plan.planInfoList = addPlanInfo;
     this.planList.push(plan);
   }

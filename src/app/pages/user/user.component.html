@@ -1,1 +1,37 @@
-<p>user works!</p>
+<button style="margin-top: 4px;margin-right: 10px" nz-button nzType="primary" (click)="downLoad()">下载模板</button>
+<nz-upload [nzAction]="uploadUrl" [nzCustomRequest]="customReq">
+  <button nz-button><i nz-icon nzType="upload"></i><span>数据导入</span></button>
+</nz-upload>
+
+<nz-table #basicTable [nzData]="dataSet" [nzPageSize]="pageSize" [(nzPageIndex)]="pageIndex" [nzTotal]="total" [nzFrontPagination]="false"
+  (nzPageIndexChange)="getCustomerList()" [nzShowTotal]="totalTemplate">
+  <thead>
+  <tr>
+    <th>手机号</th>
+    <th>客户编号</th>
+    <th>客户名称</th>
+    <th>证件号码</th>
+    <th>交易数量</th>
+    <th>交易金额</th>
+    <th>剩余抽奖次数</th>
+    <th>中奖标识</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{data.phoneNo}}</td>
+    <td>{{data.customerNo}}</td>
+    <td>{{data.customerName}}</td>
+    <td>{{data.certNo}}</td>
+    <td>{{data.transactionCount}}</td>
+    <td>{{data.transactionAmount}}</td>
+    <td>{{data.remainingCount}}</td>
+    <td>{{data.flag}}</td>
+  </tr>
+  </tbody>
+</nz-table>
+
+
+<ng-template #totalTemplate>
+  共 {{total}} 条数据
+</ng-template>
