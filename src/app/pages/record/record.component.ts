@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AdminService} from "../admin.service";
 
 @Component({
   selector: 'app-record',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./record.component.css']
 })
 export class RecordComponent implements OnInit {
+  recordList = [];
 
-  constructor() { }
+  constructor(private service: AdminService) { }
 
   ngOnInit(): void {
+    this.getRecordlist();
+  }
+
+  // 获取中奖记录列表
+  getRecordlist() {
+    this.service.getRecordList().subscribe(res => {
+      this.recordList = res.data;
+    })
   }
 
 }

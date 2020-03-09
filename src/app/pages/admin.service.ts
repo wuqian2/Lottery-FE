@@ -48,4 +48,9 @@ export class AdminService {
   getCustomerList(pageSize, pageIndex) {
     return this.httpClient.get<Result>(this.url + '/common/customer', {params:{'pageSize': pageSize,'pageIndex': pageIndex}});
   }
+
+  //获取记录列表
+  getRecordList() {
+    return this.httpClient.get<Result>(this.url + '/common/record');
+  }
 }
