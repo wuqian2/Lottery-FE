@@ -22,6 +22,7 @@ export class Plan {
   public beginDate: Date;
   public endDate: Date;
   public baseProbability: number;
+  public topProbability: number;
   public lotteryCount: number;
   public planInfoList: PlanInfo[];
 }
