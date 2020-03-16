@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Plan, Prize, Result} from "../dto/adminDto";
+import {Plan, Prize, PrizeInfo, Result} from "../dto/adminDto";
 import {Observable} from "rxjs";
 import {backendUrl} from "../../environments/environment";
 
@@ -13,6 +13,23 @@ export class AdminService {
   constructor(private httpClient: HttpClient) {
 
   }
+
+  //保存prizeInfo
+  savePrizeInfo(prizeInfo: PrizeInfo[]) {
+    return this.httpClient.post<Result>(this.url + '/admin/prizeInfo', prizeInfo);
+  }
+
+  //获取奖品列表
+  getPrizeInfoList(prizeId: number) {
+    return this.httpClient.get<Result>(this.url + '/admin/prizeInfo/'+prizeId);
+  }
+
+  // 删除商品
+  deletePrizeInfo(id) {
+    return this.httpClient.delete<Result>(this.url + '/admin/prizeInfo/' + id);
+  }
+
+
 
   //新增奖品
   savePrize(prize: Prize) {
@@ -35,7 +52,7 @@ export class AdminService {
   }
 
   //获取计划列表
-  getPlanList() {
+  getPlan() {
     return this.httpClient.get<Result>(this.url + '/admin/plan');
   }
 

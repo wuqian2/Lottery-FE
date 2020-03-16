@@ -17,3 +17,11 @@ th{
 nz-select{
   width: 100%;
 }
+
+::ng-deep .ant-card-head{
+  height: 30px;
+  font-weight: 500;
+}
+
+
+

@@ -14,8 +14,21 @@ export class Prize {
   public prizeLevel: string;
   public prizeCount: number;
   public sentedPrize: number;
+  public quantityLimit: number;
+  public amountLimit: number;
+}
+
+export class PrizeInfo {
+  public id: number;
+  public prizeId: number;
+  public beginDate: Date;
+  public endDate: Date;
+  public count: number;
+  public sended: number;
+
 
 }
+
 
 export class Plan {
   public id: number;

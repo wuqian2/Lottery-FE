@@ -1,0 +1,173 @@
+<nz-card nzTitle="新增奖品">
+  <form nz-form (ngSubmit)="onSubmit()" #prizeForm="ngForm">
+    <div nz-row [nzGutter]="8">
+      <div nz-col [nzSpan]="7">
+        <nz-form-item nzFlex>
+          <nz-form-label nzRequired>奖品名称</nz-form-label>
+          <nz-form-control nzHasFeedback>
+            <input nz-input required maxlength="20" [(ngModel)]="addPrize.prizeName" id="prizeName"
+                   name="prizeName"/>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="7">
+        <nz-form-item nzFlex>
+          <nz-form-label nzRequired>奖品数量</nz-form-label>
+          <nz-form-control nzHasFeedback>
+            <nz-input-number nz-input required [(ngModel)]="addPrize.prizeCount" id="prizeCount"
+                             name="prizeCount">
+            </nz-input-number>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="7">
+        <nz-form-item nzFlex>
+          <nz-form-label nzRequired>金额限制</nz-form-label>
+          <nz-form-control nzHasFeedback>
+
+            <nz-input-number nz-input required [(ngModel)]="addPrize.amountLimit" id="amountLimit"
+                             name="amountLimit">
+            </nz-input-number>
+
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="7">
+        <nz-form-item nzFlex>
+          <nz-form-label nzRequired>笔数限制</nz-form-label>
+          <nz-form-control nzHasFeedback>
+
+            <nz-input-number nz-input required [(ngModel)]="addPrize.quantityLimit" id="quantityLimit"
+                             name="quantityLimit">
+            </nz-input-number>
+
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="7">
+        <nz-form-item nzFlex>
+          <nz-form-label nzRequired>奖品等级</nz-form-label>
+          <nz-form-control nzHasFeedback>
+
+            <nz-select [(ngModel)]="addPrize.prizeLevel" nzPlaceHolder="选择等级....." id="prizeLevel" name="prizeLevel">
+              <nz-option *ngFor="let level of prizeLevel" [nzValue]="level.code" [nzLabel]="level.value"></nz-option>
+            </nz-select>
+
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <button style="margin-top: 4px" nz-button nzType="primary" [disabled]="!prizeForm.form.valid">新增</button>
+
+    </div>
+
+  </form>
+</nz-card>
+
+<nz-card nzTitle="计划配置" style="margin-top: 10px">
+  <div nz-row>
+    <div nz-col [nzSpan]="5">
+      <nz-form-item nzFlex>
+        <nz-form-label nzRequired>计划日期</nz-form-label>
+        <nz-form-control>
+          <nz-date-picker [(ngModel)]="plan.beginDate"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="4">
+      <nz-form-item nzFlex>
+        -
+        <nz-form-control>
+          <nz-date-picker [(ngModel)]="plan.endDate"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="5">
+      <nz-form-item nzFlex>
+        <nz-form-label nzRequired>概率范围</nz-form-label>
+        <nz-form-control>
+          <nz-input-group [nzSuffix]="suffixTemplateInfo">
+            <input nz-input required [(ngModel)]="plan.baseProbability"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="4">
+      <nz-form-item nzFlex>
+        -
+        <nz-form-control>
+          <nz-input-group [nzSuffix]="suffixTemplateInfo">
+            <input nz-input required [(ngModel)]="plan.topProbability"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="4">
+      <nz-form-item nzFlex>
+        <nz-form-label nzRequired>抽奖次数</nz-form-label>
+        <nz-form-control>
+          <nz-input-number nz-input required [(ngModel)]="plan.lotteryCount"></nz-input-number>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="2">
+      <div style="margin-top: 5px">
+        <button  style="margin-left: 4px" nz-button nzType="primary" (click)="savePlan()">保存</button>
+      </div>
+    </div>
+  </div>
+</nz-card>
+
+
+<nz-card style="width: 100%;margin-top: 20px" nzTitle="奖品列表">
+  <nz-table #basicTable [nzData]="prizeList" [nzPageSize]="5">
+    <thead>
+    <tr>
+      <th style="width: 15%">奖品名称</th>
+      <th style="width: 15%">奖品等级</th>
+      <th style="width: 15%">奖品数量</th>
+      <th style="width: 15%">金额限制</th>
+      <th style="width: 15%">笔数限制</th>
+      <th style="width: 10%">已中数量</th>
+      <th style="width: 15%">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td><input nz-input [(ngModel)]="data.prizeName"  required maxlength="20"></td>
+      <td>
+        <nz-select [(ngModel)]="data.prizeLevel" required nzPlaceHolder="选择等级.....">
+          <nz-option *ngFor="let level of prizeLevel" [nzValue]="level.code" [nzLabel]="level.value"></nz-option>
+        </nz-select>
+      </td>
+      <td><nz-input-number nz-input required [(ngModel)]="data.prizeCount"></nz-input-number></td>
+      <td><nz-input-number nz-input required [(ngModel)]="data.amountLimit"></nz-input-number></td>
+      <td><nz-input-number nz-input required [(ngModel)]="data.quantityLimit"></nz-input-number></td>
+      <td>{{data.sentedPrize}}</td>
+      <td>
+
+        <a (click)="editPlanInfo(data.id)">计划</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="savePrize(data)">保存</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a nz-popconfirm
+           nzPopconfirmTitle="确认删除吗？"
+           nzPopconfirmPlacement="bottom"
+           (nzOnConfirm)="deletePrize(data.id)">删除</a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+
+</nz-card>
+
+<ng-template #suffixTemplateInfo>
+  <span>%</span>
+</ng-template>
+<ng-template #prefixTemplateInfo>
+  <span>>=</span>
+</ng-template>
+
+
+

@@ -1,0 +1,27 @@
+<button  style="margin-left: 4px" nz-button nzType="primary" (click)="addPrizeInfo()">新增</button>
+<button  style="margin-left: 4px" nz-button (click)="savPrizeInfo()">保存</button>
+<nz-table #basicTable [nzData]="prizeInfoList"  [nzPageSize]="5">
+  <thead>
+  <tr>
+    <th style="width: 20%">开始日期</th>
+    <th style="width: 20%">结束日期</th>
+    <th style="width: 20%">奖品数量</th>
+    <th style="width: 20%">已送出数量</th>
+    <th style="width: 20%">操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of prizeInfoList">
+    <td><nz-date-picker [nzDisabledDate]="disabledDate" [(ngModel)]="data.beginDate"  required maxlength="20"></nz-date-picker></td>
+    <td><nz-date-picker [nzDisabledDate]="disabledDate"  [(ngModel)]="data.endDate"  required maxlength="20"></nz-date-picker></td>
+    <td><input nz-input [(ngModel)]="data.count"  required maxlength="20"></td>
+    <td>{{data.sended}}</td>
+    <td>
+      <a nz-popconfirm
+         nzPopconfirmTitle="确认删除吗？"
+         nzPopconfirmPlacement="bottom"
+         (nzOnConfirm)="deletePlan(data.id)">删除</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

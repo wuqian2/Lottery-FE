@@ -11,10 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {LogsComponent} from "./pages/logs/logs.component";
-import {PlanComponent} from "./pages/plan/plan.component";
-import {PrizeComponent} from "./pages/prize/prize.component";
 import {RecordComponent} from "./pages/record/record.component";
 import {UserComponent} from "./pages/user/user.component";
+import {ConfigComponent} from "./pages/config/config.component";
+import {PrizeInfoComponent} from "./pages/prize-info/prize-info.component";
 
 registerLocaleData(zh);
 
@@ -22,10 +22,10 @@ registerLocaleData(zh);
   declarations: [
     AppComponent,
     LogsComponent,
-    PlanComponent,
-    PrizeComponent,
     RecordComponent,
-    UserComponent
+    UserComponent,
+    ConfigComponent,
+    PrizeInfoComponent
   ],
   imports: [
     BrowserModule,
