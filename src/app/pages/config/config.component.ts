@@ -78,14 +78,15 @@ export class ConfigComponent implements OnInit {
 
 
   // 编辑奖品计划
-  editPlanInfo(id) {
+  editPlanInfo(prize: Prize) {
     const modal = this.modalService.create({
       nzTitle: '奖品计划',
       nzContent: PrizeInfoComponent,
       nzComponentParams: {
-        prizeId: id,
+        prizeId: prize.id,
         planBeginDate: this.plan.beginDate,
-        planEndDate: this.plan.endDate
+        planEndDate: this.plan.endDate,
+        prizeCount: prize.prizeCount
       },
       nzFooter: null,
       nzStyle: {width:'800px'}

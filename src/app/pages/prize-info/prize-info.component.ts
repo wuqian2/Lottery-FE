@@ -54,13 +54,20 @@ export class PrizeInfoComponent implements OnInit {
   addPrizeInfo() {
      const prizeInfo = new PrizeInfo();
      prizeInfo.prizeId = this.prizeId;
+     prizeInfo.sended = 0;
     this.prizeInfoList = [ ...this.prizeInfoList,prizeInfo ];
   }
 
   // 保存
   savPrizeInfo() {
+    let sum: number = 0;
+    this.prizeInfoList.forEach(p => sum = sum + p.count);
+    if (sum !== this.prizeCount) {
+      this.message.error("配置的数量与奖品总数不匹配！请确认配置");
+      return;
+    }
     this.service.savePrizeInfo(this.prizeInfoList).subscribe(res => {
       this.message.info("保存成功");
-    })
+    });
   }
 }
